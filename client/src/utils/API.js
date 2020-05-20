@@ -16,15 +16,13 @@ export default {
   // Saves a book to the database
   saveBook: function (bookData) {
     return axios.post("/api/books", bookData);
-  }
-};
+  },
 
-export default {
-  getBooksByQuery: function (language) {
+getBooksByQuery: function (query) {
     let queryUrl = "https://www.googleapis.com/books/v1/volumes?q-" + query + "&key=AIzaSyBpItw0_3uYZZlc5LWDefKR3DRsVrXFccA"
     return new Promise((resolve, reject) => {
       axios
-        .get("https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyBpItw0_3uYZZlc5LWDefKR3DRsVrXFccA")
+        .get(queryUrl)
         .then(res => {
           const books = res.data.items;
           const results = books.map(book => {
@@ -40,4 +38,5 @@ export default {
         })
         .catch(err => reject(err));
     });
-  },
+  }
+};

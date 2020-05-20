@@ -1,11 +1,11 @@
 import React from "react";
 
-function resultsContainer () {
+function resultContainer () {
     return(
-        <div className="resultsContainer">
+        <div className="resultContainer">
             <h3>Results</h3>
         </div>
     )
 }
 
-export default resultsContainer;
+export default resultContainer;
