@@ -18,3 +18,30 @@ export default {
     return axios.post("/api/books", bookData);
   }
 };
+
+export default {
+  getBooksByQuery: function(language) {
+    let queryUrl = "https://www.googleapis.com/books/v1/volumes?q-" + query + "&key=AIzaSyBpItw0_3uYZZlc5LWDefKR3DRsVrXFccA"
+    return new Promise((resolve, reject) => {
+      axios
+        .get("https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyBpItw0_3uYZZlc5LWDefKR3DRsVrXFccA")
+        .then(res => {
+          const books = res.data;
+          const results = books.map(book => {
+            return {
+              title: book.volumeInfo.title ,
+              authers: book.volumeInfo.authers,
+              description: book.volumeInfo.description,
+              image: book.volumeInfo.ImageLinks.thumbnail,
+              link: book.volumeInfo.infoLink
+            };
+          });
+          resolve(results);
+        })
+        .catch(err => reject(err));
+    });
+  },
+
+
+https://www.googleapis.com/books/v1/volumes?q=flowers&key=
+AIzaSyBpItw0_3uYZZlc5LWDefKR3DRsVrXFccA
